@@ -1,0 +1,36 @@
+.vscode
+
+# python cache / compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# model directory
+model/
+
+# Environments
+.env
+.venv
+
+#  Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+*.tfvars
+
+# .tfplan files
+*.tfplan
+
+# .pem files
+*.pem
+
+# terraform imports
+terraform_imports
+
+# local Dockerfile for local testing
+Dockerfile_local
+run_docker.sh

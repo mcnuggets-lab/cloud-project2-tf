@@ -1,0 +1,4 @@
+flask==3.0.3
+# torch==2.3.1 --index-url https://download.pytorch.org/whl/cpu
+serverless-wsgi==3.0.4
+transformers==4.42.3

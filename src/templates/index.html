@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<title>A simple QA model</title>
+<h1>A simple QA model</h1>
+<form id="qaForm" action="/answer" method="post">
+    <p>Enter your question. (max 500 characters)</p>
+    <input type="text" name="question" maxlength="500" style="width: 40%" placeholder="What is my name?" />
+    <p>Supply your context. (max 5000 characters)</p>
+    <textarea name="context" rows="5" maxlength="5000" style="width: 40%"
+        placeholder="I'm Kit-Ho Mak. I come from Hong Kong."></textarea>
+    <p><input type="submit" value="Submit" /></p>
+</form>
+<p style="width: 40%">
+    <span id="answer" style="width: 35%;"></span>
+    <span id="score" style="width: 20%; float: right; text-align: right; font-size: 0.5em;"></span>
+</p>
+<footer>
+    <a href="https://d140z3ialfxhsy.cloudfront.net/post/cloud-project2/" target="_blank" style="position: fixed; bottom: 0; height: 8em;">What is behind?</a>
+    <a href="https://d140z3ialfxhsy.cloudfront.net/" target="_blank" style="position: fixed; bottom: 0; height: 6.5em;">Who am I?</a>
+</footer>
+
+<script>
+    document.getElementById("qaForm").addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        fetch(event.target.action, {
+            method: 'POST',
+            body: new URLSearchParams(new FormData(event.target))
+        }).then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        }).then((body) => {
+            document.getElementById("answer").innerHTML = `Answer: ${body["answer"]}`;
+            document.getElementById("score").innerHTML = `(Confidence: ${body["score"].toFixed(4)})`;
+        }).catch((error) => {
+            console.log(error);
+            document.getElementById("answer").innerHTML = "ERROR! Please try again later.";
+        });
+    });
+</script>
+
+</html>
